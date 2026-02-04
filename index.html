@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing Games</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
+        #sentence {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <div class="topnav">
+        <div class="logo">Games Compilation</div>
+        <div class="menu">
+            <a href="index.html">Game 1</a>
+            <a href="number.html">Game 2</a>
+            <a href="click.html">Game 3</a>
+            <a href="rps.html">Game 4</a>
+            <a href="catch.html">Game 5</a>
+        </div>
+    </div>
+
+    <!-- Content Below Topnav -->
+    <div class="content">
+         <h1>⌨️ Typing Sentence Game</h1>
+
+    <p id="sentence"></p>
+
+    <input type="text" id="input" placeholder="Type the sentence here..." autofocus>
+
+    <p id="result"></p>
+
+    <h3>Score: <span id="score">0</span></h3>
+
+
+    <script>
+        const sentences = [
+            "I love learning how to code with JavaScript",
+            "Practice typing every day to improve speed",
+            "Coding is fun and useful for the future",
+            "Never give up when learning something new"
+        ];
+
+        let score = 0;
+
+        const sentenceDisplay = document.getElementById("sentence");
+        const input = document.getElementById("input");
+        const result = document.getElementById("result");
+        const scoreDisplay = document.getElementById("score");
+
+        function newSentence() {
+            const random = Math.floor(Math.random() * sentences.length);
+            sentenceDisplay.textContent = sentences[random];
+            input.value = "";
+            result.textContent = "";
+        }
+
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                if (input.value === sentenceDisplay.textContent) {
+                    result.textContent = "✅ Correct!";
+                    score++;
+                    scoreDisplay.textContent = score;
+                    newSentence();
+                } else {
+                    result.textContent = "❌ Not quite. Try again!";
+                }
+            }
+        });
+
+        newSentence();
+    </script>
+
+
+    </div>
+
+</body>
+</html>

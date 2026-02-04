@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Click Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
+        #sentence {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <div class="topnav">
+        <div class="logo">Games Compilation</div>
+        <div class="menu">
+            <a href="index.html">Game 1</a>
+            <a href="number.html">Game 2</a>
+            <a href="click.html">Game 3</a>
+            <a href="rps.html">Game 4</a>
+            <a href="catch.html">Game 5</a>
+        </div>
+    </div>
+
+    <!-- Content Below Topnav -->
+    <div class="content">
+       <h2>Click the Button!</h2>
+
+  <button onclick="count()">Click Me</button>
+  <p>Score: <span id="score">0</span></p>
+
+  <script>
+    let score = 0;
+
+    function count() {
+      score++;
+      document.getElementById("score").innerHTML = score;
+    }
+  </script>  
+  
+
+
+    </div>
+
+</body>
+</html>

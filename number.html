@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the number</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
+        #sentence {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <div class="topnav">
+        <div class="logo">Games Compilation</div>
+        <div class="menu">
+           <a href="index.html">Game 1</a>
+            <a href="number.html">Game 2</a>
+            <a href="click.html">Game 3</a>
+            <a href="rps.html">Game 4</a>
+            <a href="catch.html">Game 5</a>
+        </div>
+    </div>
+
+    <!-- Content Below Topnav -->
+    <div class="content">
+          <h1>🎯 Guess the Number</h1>
+    <p>I am thinking of a number between <b>1 and 100</b></p>
+
+    <input type="number" id="guess" placeholder="Enter number (1–100)">
+    <button onclick="checkGuess()">Guess</button>
+
+    <p id="message"></p>
+
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkGuess() {
+            const userGuess = Number(document.getElementById("guess").value);
+            const message = document.getElementById("message");
+
+            if (userGuess < 1 || userGuess > 100) {
+                message.textContent = "❗ Please enter a number between 1 and 100";
+                return;
+            }
+
+            if (userGuess === randomNumber) {
+                message.textContent = "🎉 Correct! You guessed the number!";
+            } else if (userGuess > randomNumber) {
+                message.textContent = "⬆️ Too high! Try again.";
+            } else {
+                message.textContent = "⬇️ Too low! Try again.";
+            }
+        }
+    </script>
+
+
+    </div>
+
+</body>
+</html>

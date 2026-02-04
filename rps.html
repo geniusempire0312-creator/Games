@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
+        #sentence {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <div class="topnav">
+        <div class="logo">Games Compilation</div>
+        <div class="menu">
+            <a href="index.html">Game 1</a>
+            <a href="number.html">Game 2</a>
+            <a href="click.html">Game 3</a>
+            <a href="rps.html">Game 4</a>
+            <a href="catch.html">Game 5</a>
+        </div>
+    </div>
+
+    <!-- Content Below Topnav -->
+    <div class="content">
+         <h2>Rock Paper Scissors</h2>
+
+  <button onclick="play('Rock')">Rock</button>
+  <button onclick="play('Paper')">Paper</button>
+  <button onclick="play('Scissors')">Scissors</button>
+
+  <p id="result"></p>
+
+  <script>
+    function play(user) {
+      let choices = ["Rock", "Paper", "Scissors"];
+      let computer = choices[Math.floor(Math.random() * 3)];
+
+      if (user === computer) {
+        result.innerHTML = "Draw! Both chose " + user;
+      } else if (
+        (user === "Rock" && computer === "Scissors") ||
+        (user === "Paper" && computer === "Rock") ||
+        (user === "Scissors" && computer === "Paper")
+      ) {
+         result.innerHTML = "🎉 You win! Computer chose " + computer;
+      } else {
+        result.innerHTML = "😢 You lose! Computer chose " + computer;
+      }
+    }
+  </script>
+
+    </div>
+
+</body>
+</html>
