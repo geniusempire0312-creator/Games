@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Click Game</title>
+    <title>Catch Me Game</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -33,25 +33,77 @@
             <a href="click.html">Game 3</a>
             <a href="rps.html">Game 4</a>
             <a href="catch.html">Game 5</a>
+            <a href="memory.html">Game 6</a>
+            <a href="snake.html">Game 7</a>
         </div>
     </div>
 
     <!-- Content Below Topnav -->
     <div class="content">
-       <h2>Click the Box!</h2>
+      <h2>Click the Box!</h2>
 
-  <div onclick="score++" 
-       style="width:100px;height:100px;background:red;cursor:pointer;">
-  </div>
+<div id="box"></div>
 
-  <p>Score: <span id="score">0</span></p>
+<p>Score: <span id="score">0</span></p>
+<p>Time left: <span id="time">60</span>s</p>
 
-  <script>
-    let score = 0;
-    setInterval(() => {
-      document.getElementById("score").innerText = score;
-    }, 100);
-  </script>
+<script>
+  let score = 0;
+  let timeLeft = 60;
+  let moveTimeout;
+  let gameInterval;
+
+  const box = document.getElementById("box");
+  const scoreText = document.getElementById("score");
+  const timeText = document.getElementById("time");
+
+  // style the box
+  box.style.width = "100px";
+  box.style.height = "100px";
+  box.style.background = "red";
+  box.style.position = "absolute";
+  box.style.cursor = "pointer";
+
+  function moveBox() {
+    const maxX = window.innerWidth - 100;
+    const maxY = window.innerHeight - 100;
+
+    box.style.left = Math.random() * maxX + "px";
+    box.style.top = Math.random() * maxY + "px";
+  }
+
+  function resetMoveTimer() {
+    clearTimeout(moveTimeout);
+    moveTimeout = setTimeout(moveBox, 500); // move after 5s no click
+  }
+
+  box.onclick = () => {
+    if (timeLeft <= 0) return; // stop clicking after game ends
+
+    score++;
+    scoreText.innerText = score;
+    resetMoveTimer();
+  };
+
+  function startGame() {
+    moveBox();
+    resetMoveTimer();
+
+    gameInterval = setInterval(() => {
+      timeLeft--;
+      timeText.innerText = timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(gameInterval);
+        clearTimeout(moveTimeout);
+        alert("⏰ Time's up! Your score: " + score);
+      }
+    }, 1000);
+  }
+
+  startGame();
+</script>
+
 
 
     </div>
