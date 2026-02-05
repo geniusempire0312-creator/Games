@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
+        #sentence {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+         .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      width: 80px;
+      height: 80px;
+      background: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .matched {
+      background: #2ecc71;
+      cursor: default;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <div class="topnav">
+        <div class="logo">Games Compilation</div>
+        <div class="menu">
+            <a href="index.html">Game 1</a>
+            <a href="number.html">Game 2</a>
+            <a href="click.html">Game 3</a>
+            <a href="rps.html">Game 4</a>
+            <a href="catch.html">Game 5</a>
+            <a href="memory.html">Game 6</a>
+            <a href="snake.html">Game 7</a>
+        </div>
+    </div>
+
+    <!-- Content Below Topnav -->
+    <div class="content">
+       <h2>🧠 Memory Card Game</h2>
+<p>Find all matching pairs!</p>
+<div class="grid" id="grid"></div>
+<p>Moves: <span id="moves">0</span></p>
+
+<script>
+const symbols = ["🍎","🍌","🍇","🍒","🍎","🍌","🍇","🍒"];
+let shuffled = symbols.sort(() => 0.5 - Math.random());
+
+const grid = document.getElementById("grid");
+let first = null;
+let second = null;
+let lock = false;
+let moves = 0;
+
+shuffled.forEach(symbol => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.dataset.symbol = symbol;
+  card.innerText = "?";
+
+  card.addEventListener("click", () => {
+    if (lock || card.classList.contains("matched") || card === first) return;
+
+    card.innerText = symbol;
+
+    if (!first) {
+      first = card;
+      return;
+    }
+
+    second = card;
+    moves++;
+    document.getElementById("moves").innerText = moves;
+
+    if (first.dataset.symbol === second.dataset.symbol) {
+      first.classList.add("matched");
+      second.classList.add("matched");
+      first = second = null;
+      checkWin();
+    } else {
+      lock = true;
+      setTimeout(() => {
+        first.innerText = "?";
+        second.innerText = "?";
+        first = second = null;
+        lock = false;
+      }, 800);
+    }
+  });
+
+  grid.appendChild(card);
+});
+
+function checkWin() {
+  const allMatched = document.querySelectorAll(".matched").length === symbols.length;
+  if (allMatched) {
+    setTimeout(() => alert("🎉 You win in " + moves + " moves!"), 200);
+  }
+}
+</script>
+
+
+    </div>
+
+</body>
+</html>
